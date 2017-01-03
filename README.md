@@ -3,11 +3,11 @@
 ## How to install
 (install hugo)
 
-`$ git clone git@github.com:jsosug/sossweb.git`
+`$ git clone git@github.com:jsoss-sig/jsoss-sig.web.source.git`
 
-`$ cd sossweb`
+`$ cd jsoss-sig.web.source`
 
-`$ git clone git@github.com:jsosug/jsosug.github.io.git public`
+`$ git clone git@github.com:jsoss-sig/jsoss-sig.github.io.git public`
 
 ## How to write blog post
 `$ hugo new post/{{slug-name}}.md`
