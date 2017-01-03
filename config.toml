@@ -1,0 +1,29 @@
+baseurl = "https://jsosug.github.io/"
+title = "Secure OSS SIG"
+languageCode = "ja-JP"
+contentdir = "content"
+layoutdir = "layouts"
+publishdir = "public"
+builddrafts = false
+canonifyurls = true
+
+[taxonomies]
+	category = "categories"
+	tag = "tags"
+
+[params]
+	description = "Secure OSS SIG"
+	author = "SOSS SIG"
+  copyright = "SOSS SIG all rights reserved. 2016"
+
+[[menu.main]]
+    name = "about SOSS"
+    pre = "<i class='fa fa-heart'></i>"
+    weight = -110
+    identifier = "about"
+    url = "/about/"
+[[menu.main]]
+    name = "Blog"
+    pre = "<i class='fa fa-road'></i>"
+    weight = -100
+    url = "/post/"
