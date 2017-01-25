@@ -14,7 +14,7 @@ Docker) and how can we mitigate it by using SELinux.
 ## Reference
 
 #### [Docker vulnerability (CVE-2016-9962) PoC with
-SELinux](https://jsosug.github.io/post/omok-selinux-docker-20170118/)
+SELinux](https://jsoss-sig.github.io/post/omok-selinux-docker-20170118/)
 
 #### <https://bugzilla.redhat.com/show_bug.cgi?id=1409531>
 

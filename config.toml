@@ -1,4 +1,4 @@
-baseurl = "https://jsosug.github.io/"
+baseurl = "https://jsoss-sig.github.io/"
 title = "Secure OSS SIG"
 languageCode = "ja-JP"
 contentdir = "content"
