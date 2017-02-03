@@ -7,14 +7,15 @@ draft = false
 This blog is for following up to reproduce CVE-2016-9962(vulnerability for
 Docker) and how can we mitigate it by using SELinux.
 
+(Written by Kazuki Omo:ka-omo@sios.com).
+
   
 
 * * *
 
 ## Reference
 
-#### [Docker vulnerability (CVE-2016-9962) PoC with
-SELinux](https://jsoss-sig.github.io/post/omok-selinux-docker-20170118/)
+#### [Docker vulnerability (CVE-2016-9962) PoC with SELinux](https://jsoss-sig.github.io/post/omok-selinux-docker-20170118/)
 
 #### <https://bugzilla.redhat.com/show_bug.cgi?id=1409531>
 
@@ -63,8 +64,7 @@ container_runtime_exec_t file(/usr/bin/runc), such as;
     
     
     
-    ./container.cil:(typetransition initrc_domain container_runtime_exec_t process c
-    ontainer_runtime_t)
+    ./container.cil:(typetransition initrc_domain container_runtime_exec_t process container_runtime_t)
     
 
 Then, for doing PoC more close to existance situation, we need to run "runc"
@@ -204,13 +204,13 @@ If the "runc" is not working on container_t domain, chack
   * Check SELinux is enabled;
     
         [root@localhost ~]# getenforce
-    Enforcing
+        Enforcing
     
 
   * run container(sh) in shell1;
     
         [root@localhost ~]# runc run ctr
-    / # 
+        / # 
     
 
   * run new container in shell2 with "runc exec" command. It is pausing 500sec;
@@ -222,35 +222,35 @@ If the "runc" is not working on container_t domain, chack
   * run "ps ax" in shell1. You can see shell2 process;
     
         [root@localhost ~]# runc run ctr
-    / # ps ax
-    PID   USER     TIME   COMMAND
-        1 root       0:00 sh
-        6 root       0:00 /proc/self/exe init
-       11 root       0:00 ps ax
-    / # 
+        / # ps ax
+        PID   USER     TIME   COMMAND
+            1 root       0:00 sh
+            6 root       0:00 /proc/self/exe init
+           11 root       0:00 ps ax
+        / # 
     
 
   * In above case, check /proc/6/fd by ls command. You see path as fd/4;
     
         / # ls -la /proc/6/fd/
-    total 0
-    dr-x------    2 root     root             0 Jan 16 06:43 .
-    dr-xr-xr-x    9 root     root             0 Jan 16 06:43 ..
-    lrwx------    1 root     root            64 Jan 16 06:43 0 -> /dev/pts/4
-    lrwx------    1 root     root            64 Jan 16 06:43 1 -> /dev/pts/4
-    lrwx------    1 root     root            64 Jan 16 06:43 2 -> /dev/pts/4
-    lrwx------    1 root     root            64 Jan 16 06:43 3 -> socket:[40487]
-    lr-x------    1 root     root            64 Jan 16 06:43 4 -> /run/runc/ctr
-    lrwx------    1 root     root            64 Jan 16 06:43 5 -> /dev/pts/4
-    lr-x------    1 root     root            64 Jan 16 06:43 6 -> pipe:[40496]
-    l-wx------    1 root     root            64 Jan 16 06:43 7 -> /dev/null
-    / # 
+        total 0
+        dr-x------    2 root     root             0 Jan 16 06:43 .
+        dr-xr-xr-x    9 root     root             0 Jan 16 06:43 ..
+        lrwx------    1 root     root            64 Jan 16 06:43 0 -> /dev/pts/4
+        lrwx------    1 root     root            64 Jan 16 06:43 1 -> /dev/pts/4
+        lrwx------    1 root     root            64 Jan 16 06:43 2 -> /dev/pts/4
+        lrwx------    1 root     root            64 Jan 16 06:43 3 -> socket:[40487]
+        lr-x------    1 root     root            64 Jan 16 06:43 4 -> /run/runc/ctr
+        lrwx------    1 root     root            64 Jan 16 06:43 5 -> /dev/pts/4
+        lr-x------    1 root     root            64 Jan 16 06:43 6 -> pipe:[40496]
+        l-wx------    1 root     root            64 Jan 16 06:43 7 -> /dev/null
+        / # 
     
 
   * Do ls /etc/shadow file by using "/proc/6/fd/4/../../../etc/shadow" path;
     
         / # ls -l /proc/6/fd/4/../../../etc/shadow
-    ls: /proc/6/fd/4/../../../etc/shadow: Permission denied
+        ls: /proc/6/fd/4/../../../etc/shadow: Permission denied
     
 
 Check /var/log/audit/audit.log;
@@ -264,7 +264,7 @@ Fine, Now SELinux is protecting to search /etc/shadow file.
   * Also you can't read /etc/shadow file because the file permission is "000".
     
         / # cat /proc/6/fd/4/../../../etc/shadow
-    cat: can't open '/proc/6/fd/4/../../../etc/shadow': Permission denied
+        cat: can't open '/proc/6/fd/4/../../../etc/shadow': Permission denied
     
 
 If I change /etc/shadow file as "755" permission, the DAC control will permit
@@ -272,15 +272,15 @@ to read the file.
 
     
         [root@fedora25 ~]# chmod 755 /etc/shadow
-    [root@fedora25 ~]# ls -lh /etc/shadow
-    -rwxr-xr-x. 1 root root 1.3K Jan 20 08:30 /etc/shadow
+        [root@fedora25 ~]# ls -lh /etc/shadow
+        -rwxr-xr-x. 1 root root 1.3K Jan 20 08:30 /etc/shadow
     
 
 But still I can't read /etc/shadow file ;
 
     
         / # cat /proc/6/fd/4/../../../etc/shadow
-    cat: can't open '/proc/6/fd/4/../../../etc/shadow': Permission denied
+        cat: can't open '/proc/6/fd/4/../../../etc/shadow': Permission denied
     
 
 I could see in the /var/log/audit/audit.log file that the"read" action is
