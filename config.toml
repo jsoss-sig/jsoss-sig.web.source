@@ -21,7 +21,7 @@ canonifyurls = true
     pre = "<i class='fa fa-heart'></i>"
     weight = -110
     identifier = "about"
-    url = "/about/"
+    url = "/about/about/"
 [[menu.main]]
     name = "Blog"
     pre = "<i class='fa fa-road'></i>"
