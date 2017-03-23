@@ -27,3 +27,8 @@ canonifyurls = true
     pre = "<i class='fa fa-road'></i>"
     weight = -100
     url = "/post/"
+[[menu.main]]
+    name = "イベント等(Events)"
+    pre = "<i class='fa fa-road'></i>"
+    weight = -100
+    url = "/event/"
