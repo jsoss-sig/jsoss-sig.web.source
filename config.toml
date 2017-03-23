@@ -1,5 +1,5 @@
 baseurl = "https://jsoss-sig.github.io/"
-title = "Secure OSS SIG"
+title = "OSSセキュリティ技術の会（Secure OSS SIG)"
 languageCode = "ja-JP"
 contentdir = "content"
 layoutdir = "layouts"
@@ -14,10 +14,10 @@ canonifyurls = true
 [params]
 	description = "Secure OSS SIG"
 	author = "SOSS SIG"
-  copyright = "SOSS SIG all rights reserved. 2016"
+    copyright = "SOSS SIG all rights reserved. 2016"
 
 [[menu.main]]
-    name = "about SOSS"
+    name = "会について(About us)"
     pre = "<i class='fa fa-heart'></i>"
     weight = -110
     identifier = "about"
