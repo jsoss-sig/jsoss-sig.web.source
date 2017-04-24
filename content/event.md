@@ -6,6 +6,11 @@ title = "イベント等(Events)"
 +++
 
 ## イベント情報・記事
+- 2017/5/16
+
+    第一回勉強会「闘将（たたかえ）！！SELinuxの巻」と題して勉強会を行います。
+    
+    登録はこちら(https://secureoss-sig.connpass.com/event/55226/)
 
 - 2017/3/10
 
