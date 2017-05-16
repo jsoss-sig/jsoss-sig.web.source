@@ -11,7 +11,7 @@
 
 `$ cd ../themes`
 
-`$ git https://github.com/eliasson/liquorice.git liquorice`
+`$ git clone https://github.com/eliasson/liquorice.git liquorice`
 
 `cd ../`
 
