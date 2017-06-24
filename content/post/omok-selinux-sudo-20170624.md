@@ -97,6 +97,7 @@ On above step 4, sudo program will think his tty is "/dev/shm/_tmp" which is lin
             }
 
   7. During the relabel_tty(), program will re-open ttyn which is now "/etc/passwd".
+
         --snip--
                 /* Re-open tty to get new label and reset std{in,out,err} */
                 close(se_state.ttyfd);
