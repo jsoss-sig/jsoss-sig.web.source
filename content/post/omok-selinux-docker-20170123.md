@@ -215,7 +215,7 @@ If the "runc" is not working on container_t domain, chack
 
   * run new container in shell2 with "runc exec" command. It is pausing 500sec;
     
-        [root@localhost ~]# runc run ctr
+        [root@localhost ~]# runc exec ctr sh
     
     
 
