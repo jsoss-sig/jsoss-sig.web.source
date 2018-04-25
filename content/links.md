@@ -7,7 +7,7 @@ title = "リンク(links)"
 ## リンク
 - 学術・研究系
 
-    岡山大学 山内教授(http://www.swlab.cs.okayama-u.ac.jp/~yamauchi/index-j.html)
+    岡山大学 山内准教授(http://www.swlab.cs.okayama-u.ac.jp/~yamauchi/index-j.html)
 
 
 - ブログ等

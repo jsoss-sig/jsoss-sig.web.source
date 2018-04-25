@@ -26,7 +26,7 @@ canonifyurls = true
     name = "Blog"
     pre = "<i class='fa fa-road'></i>"
     weight = -100
-    url = "/post/"
+    url = "http://blog.secureoss.jp/"
 [[menu.main]]
     name = "イベント等(Events)"
     pre = "<i class='fa fa-road'></i>"
